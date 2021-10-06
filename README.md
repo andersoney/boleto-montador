@@ -6,6 +6,8 @@ Para que seja inserido mais bancos basta apenas modificar a imagem que será usa
 
 Outro detalhe é que alguns leitores de PDF não reconheceram a 'fonte' do codigo de barra, desta forma é recomendado que seja aberto usando o browser.
 
+Um detalhe importante é que todas as formatações devem ser realizadas antes de passar para a geração do boleto. A biblioteca só faz converter os dados para o formato PDF. 
+
 # Parametros para geração do boleto
 ```json
 {
@@ -138,3 +140,4 @@ novoBoleto
   // .pdfFile([boleto],"./","boleto.pdf")
 
 ```
+
