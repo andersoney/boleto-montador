@@ -7,7 +7,7 @@ Para que seja inserido mais bancos basta apenas modificar a imagem que será usa
 Outro detalhe é que alguns leitores de PDF não reconheceram a 'fonte' do codigo de barra, desta forma é recomendado que seja aberto usando o browser.
 
 # Parametros para geração do boleto
-```
+```json
 {
   numeroDocumento: String(required),
   especieDocumento: String(required),

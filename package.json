@@ -6,11 +6,19 @@
   "scripts": {
     "test": "npm teste.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/andersoney/boleto-montador"
+  },
+  "keywords": ["Boleto","pdf","pdfkit"],
   "author": "",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andersoney/boleto-montador/issues"
+  },
+  "license": "MTI",
   "dependencies": {
     "base64-stream": "^1.0.0",
     "pdfkit": "^0.12.3"
-  }
+  },
+  "homepage": "https://github.com/andersoney/boleto-montador#readme"
 }
