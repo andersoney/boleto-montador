@@ -1,12 +1,5 @@
-const Boletos = require('./boletoMetodos');
+const { BoletosGerador } = require('./index');
 
-const StreamToPromise =  (stream) => {
-  console.log(123);
-	return new Promise(function(resolve, reject) {
-		stream.on('end', ()=> resolve(stream));
-		stream.on('error', ()=> reject);
-	});
-};
 const boleto = {
   banco: {
     numero: "001",
@@ -17,16 +10,15 @@ const boleto = {
     nome: "José Bonifácio de Andrada",
     registroNacional: "12345678",
     endereco: {
-      logradouro: "Rua Pedro Lessa, 15",
-      bairro: "Centro",
-      cidade: "Rio de Janeiro",
-      estadoUF: "RJ",
-      cep: "20030-030",
+      logradouro: "",
+      bairro: "",
+      cidade: "",
+      estadoUF: "",
+      cep: "",
     },
   },
   instrucoes: [
-    "Após o vencimento Mora dia R$ 1,59",
-    "Após o vencimento, multa de 2%",
+    "Não aceitar pagamento apos o vencimento.",
   ],
   beneficiario: {
     nome: "Empresa Fictícia LTDA",
@@ -65,6 +57,7 @@ const boleto = {
   deducoes: 0.0
 };
 
-const novoBoleto = new Boletos(boleto);
+const novoBoleto = new BoletosGerador(boleto);
 novoBoleto
   .pdfFile([boleto])
+  // .pdfFile([boleto],"./","boleto.pdf")

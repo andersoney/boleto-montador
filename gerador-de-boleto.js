@@ -2,6 +2,7 @@
 
 const path = require('path');
 const Pdf = require('pdfkit');
+const fs = require('fs');
 const { Base64Encode } = require('base64-stream');
 
 function merge(destination, source) {
@@ -427,7 +428,6 @@ var GeradorDeBoleto = (function () {
 				var zeroUmLinha = zeroLinha + 2 + args.tamanhoDaFonte + args.tamanhoDaFonte,
 					zeroDoisLinha = zeroUmLinha + 1 + args.tamanhoDaFonte;
 				var primeiraLinha = enderecoDoBeneficiario.logradouro + "," + enderecoDoBeneficiario.bairro;
-				console.log(primeiraLinha)
 				if (primeiraLinha && primeiraLinha !== ",") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
@@ -440,7 +440,6 @@ var GeradorDeBoleto = (function () {
 					espacamento += espacamento;
 				}
 				var segundaLinha = enderecoDoBeneficiario.cidade + "/" + enderecoDoBeneficiario.estadoUF + "-" + enderecoDoBeneficiario.cep;
-				console.log(segundaLinha)
 				if (segundaLinha && segundaLinha !== "/-") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
@@ -1177,4 +1176,15 @@ var GeradorDeBoleto = (function () {
 	return GeradorDeBoleto;
 })();
 
-module.exports = GeradorDeBoleto;
+
+module.exports = class BoletosGerador {
+  pdfFile(boletos = null, dir = './tmp/boletos', filename = "/boleto.pdf") {
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir,{ recursive: true });
+    const stream = fs.createWriteStream(`${dir}${filename}`);
+    new GeradorDeBoleto().gerarPDF({
+      creditos: '',
+      stream,
+    }, boletos);
+	console.log(`Sucess: Generate file to: ${dir}${filename}`);
+  }
+};
