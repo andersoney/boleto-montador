@@ -561,7 +561,7 @@ var GeradorDeBoleto = (function () {
 					width: 294,
 					align: 'left'
 				});
-			const valorFormatado = boleto.especieMoeda + " " + boleto.valor
+			const valorFormatado = boleto.especieMoeda + " " + boleto.valor.toFixed(2);
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
 				.text(valorFormatado, args.ajusteX + 424, args.ajusteY + primeiraLinhaOpcional, {
@@ -1093,7 +1093,7 @@ var GeradorDeBoleto = (function () {
 					width: tamanhoDasCelulasADireita,
 					align: 'left'
 				});
-			const valorDescontoFormatado = boleto.especieMoeda + " " + boleto.desconto;
+			const valorDescontoFormatado = boleto.especieMoeda + " " + boleto.desconto.toFixed(2);
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
 				.text(valorDescontoFormatado, args.ajusteX + colunaLateral, args.ajusteY + setimaLinhaLateral, {
@@ -1112,7 +1112,7 @@ var GeradorDeBoleto = (function () {
 					width: 294,
 					align: 'left'
 				});
-			const valorDeducoesFormatado = boleto.especieMoeda + " " + boleto.deducoes;
+			const valorDeducoesFormatado = boleto.especieMoeda + " " + boleto.deducoes.toFixed(2);
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
 				.text(valorDeducoesFormatado, args.ajusteX + colunaLateral, args.ajusteY + oitavaLinhaLateral, {
@@ -1178,13 +1178,13 @@ var GeradorDeBoleto = (function () {
 
 
 module.exports = class BoletosGerador {
-  pdfFile(boletos = null, dir = './tmp/boletos', filename = "/boleto.pdf") {
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir,{ recursive: true });
-    const stream = fs.createWriteStream(`${dir}${filename}`);
-    new GeradorDeBoleto().gerarPDF({
-      creditos: '',
-      stream,
-    }, boletos);
-	console.log(`Sucess: Generate file to: ${dir}${filename}`);
-  }
+	pdfFile(boletos = null, dir = './tmp/boletos', filename = "/boleto.pdf") {
+		if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+		const stream = fs.createWriteStream(`${dir}${filename}`);
+		new GeradorDeBoleto().gerarPDF({
+			creditos: '',
+			stream,
+		}, boletos);
+		console.log(`Sucess: Generate file to: ${dir}${filename}`);
+	}
 };
