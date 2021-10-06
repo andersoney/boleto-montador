@@ -427,7 +427,8 @@ var GeradorDeBoleto = (function () {
 				var zeroUmLinha = zeroLinha + 2 + args.tamanhoDaFonte + args.tamanhoDaFonte,
 					zeroDoisLinha = zeroUmLinha + 1 + args.tamanhoDaFonte;
 				var primeiraLinha = enderecoDoBeneficiario.logradouro + "," + enderecoDoBeneficiario.bairro;
-				if (primeiraLinha) {
+				console.log(primeiraLinha)
+				if (primeiraLinha && primeiraLinha !== ",") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
 						.text(primeiraLinha, args.ajusteX + 27, args.ajusteY + zeroUmLinha, {
@@ -439,7 +440,8 @@ var GeradorDeBoleto = (function () {
 					espacamento += espacamento;
 				}
 				var segundaLinha = enderecoDoBeneficiario.cidade + "/" + enderecoDoBeneficiario.estadoUF + "-" + enderecoDoBeneficiario.cep;
-				if (segundaLinha) {
+				console.log(segundaLinha)
+				if (segundaLinha && segundaLinha !== "/-") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
 						.text(segundaLinha, args.ajusteX + 27, args.ajusteY + zeroDoisLinha, {
@@ -1038,7 +1040,7 @@ var GeradorDeBoleto = (function () {
 				var espacamento = args.tamanhoDaFonte;
 				var primeiraLinha = enderecoDoPagador.logradouro + "," + enderecoDoPagador.bairro;
 				var segundaLinha = enderecoDoPagador.cidade + "/" + enderecoDoPagador.estadoUF + "-" + enderecoDoPagador.cep;
-				if (primeiraLinha) {
+				if (primeiraLinha && primeiraLinha !== ",") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
 						.text(primeiraLinha, args.ajusteX + 30, args.ajusteY + tituloDaSetimaLinha + 115 + 10 + espacamento, {
@@ -1050,7 +1052,7 @@ var GeradorDeBoleto = (function () {
 					espacamento += espacamento;
 				}
 
-				if (segundaLinha) {
+				if (segundaLinha && segundaLinha !== "/-") {
 					pdf.font('normal')
 						.fontSize(args.tamanhoDaFonte)
 						.text(segundaLinha, args.ajusteX + 30, args.ajusteY + tituloDaSetimaLinha + 115 + 10 + espacamento, {
