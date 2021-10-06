@@ -7,7 +7,7 @@ const boleto = {
   },
   locaisDePagamento: ["Banco do Brasil"],
   pagador: {
-    nome: "José Bonifácio de Andrada",
+    nome: "José Ficticio",
     registroNacional: "12345678",
     endereco: {
       logradouro: "",
@@ -44,7 +44,7 @@ const boleto = {
   especieDocumento: "DM",
   valor: 110.0,
   desconto: 5.0,
-  codigoDeBarras: "00191815500000110000000000006118455127716509",
+  codigoDeBarras: "00191815500000110000000000006118455127716505",
   codigoDigitavel: "00099.99921 50000.010004 94999.999900 9 87640000010000",
   datas: {
     vencimento: "02/04/2020",
