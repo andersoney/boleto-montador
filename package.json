@@ -1,6 +1,6 @@
 {
   "name": "boleto-montador",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Montador de Boleto Bancario.",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url":"https://github.com/andersoney/boleto-montador"
+    "url": "https://github.com/andersoney/boleto-montador"
   },
-  "keywords": ["Boleto","pdf","pdfkit"],
+  "keywords": [
+    "Boleto",
+    "pdf",
+    "pdfkit"
+  ],
   "author": "Andersoney Rodrigues",
   "bugs": {
     "url": "https://github.com/andersoney/boleto-montador/issues"
