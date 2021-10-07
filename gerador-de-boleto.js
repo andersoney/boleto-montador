@@ -617,7 +617,7 @@ var GeradorDeBoleto = (function () {
 
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
-				.text(ObjectUtils.pad(boleto.beneficiario.nossoNumero, 8, '0'), args.ajusteX + 181, args.ajusteY + segundaLinha, {
+				.text(ObjectUtils.pad(boleto.beneficiario.dadosBancarios.nossoNumero, 8, '0'), args.ajusteX + 181, args.ajusteY + segundaLinha, {
 					lineBreak: false,
 					width: 294,
 					align: 'left'
@@ -880,7 +880,7 @@ var GeradorDeBoleto = (function () {
 
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
-				.text(boleto.beneficiario.nossoNumero, args.ajusteX + colunaLateral, args.ajusteY + quintaLinha, {
+				.text(ObjectUtils.pad(boleto.beneficiario.dadosBancarios.nossoNumero, 8, '0'), args.ajusteX + colunaLateral, args.ajusteY + quintaLinha, {
 					lineBreak: false,
 					width: tamanhoDasCelulasADireita,
 					align: 'right'
