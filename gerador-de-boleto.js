@@ -1026,7 +1026,7 @@ var GeradorDeBoleto = (function () {
 					align: 'left'
 				});
 
-			let pagador=boleto.pagador.nome +" - "+ boleto.pagador.registroNacional;
+			pagador=boleto.pagador.nome +" - "+ boleto.pagador.registroNacional;
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
 				.text(pagador, args.ajusteX + 30, args.ajusteY + tituloDaSetimaLinha + 115 + 10, {
