@@ -470,10 +470,10 @@ var GeradorDeBoleto = (function () {
 					width: 294,
 					align: 'left'
 				});
-
+			let pagador=boleto.pagador.nome +" - "+ boleto.pagador.registroNacional;
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte) // TODO: Diminuir tamanho da fonte caso seja maior que X caracteres
-				.text(boleto.pagador.registroNacional, args.ajusteX + 32, args.ajusteY + primeiraLinha, {
+				.text(pagador, args.ajusteX + 32, args.ajusteY + primeiraLinha, {
 					lineBreak: false,
 					width: 294,
 					align: 'left'
