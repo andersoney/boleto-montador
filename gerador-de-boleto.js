@@ -1190,7 +1190,7 @@ module.exports = class BoletosGerador {
 				creditos: '',
 				stream,
 			}, boletos);
-			console.log(`Sucess: Generate file to: ${dir}${filename}`);
+			// console.log(`Sucess: Generate file to: ${dir}${filename}`);
 			resolve(pdf);
 		})
 	}
