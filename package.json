@@ -1,6 +1,6 @@
 {
   "name": "boleto-montador",
-  "version": "0.0.7",
+  "version": "0.1.1",
   "description": "Montador de Boleto Bancario.",
   "main": "index.js",
   "scripts": {

@@ -91,7 +91,7 @@ var GeradorDeBoleto = (function () {
 		informacoesPersonalizadas: function (pdf, x, y) { }
 	};
 
-	GeradorDeBoleto.prototype.gerarPDF = function (args, boletos = null) {
+	GeradorDeBoleto.prototype.gerarPDF = async function (args, boletos = null) {
 		if (typeof args === 'function') {
 			args = pdfDefaults;
 		}
@@ -470,7 +470,7 @@ var GeradorDeBoleto = (function () {
 					width: 294,
 					align: 'left'
 				});
-			let pagador=boleto.pagador.nome;
+			let pagador = boleto.pagador.nome;
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte) // TODO: Diminuir tamanho da fonte caso seja maior que X caracteres
 				.text(pagador, args.ajusteX + 32, args.ajusteY + primeiraLinha, {
@@ -617,7 +617,7 @@ var GeradorDeBoleto = (function () {
 
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
-				.text(ObjectUtils.pad(boleto.beneficiario.nossoNumero, 8, '0'), args.ajusteX + 181, args.ajusteY + segundaLinha, {
+				.text(ObjectUtils.pad(boleto.beneficiario.dadosBancarios.nossoNumero, 8, '0'), args.ajusteX + 181, args.ajusteY + segundaLinha, {
 					lineBreak: false,
 					width: 294,
 					align: 'left'
@@ -880,7 +880,7 @@ var GeradorDeBoleto = (function () {
 
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
-				.text(boleto.beneficiario.nossoNumero, args.ajusteX + colunaLateral, args.ajusteY + quintaLinha, {
+				.text(boleto.beneficiario.dadosBancarios.nossoNumero, args.ajusteX + colunaLateral, args.ajusteY + quintaLinha, {
 					lineBreak: false,
 					width: tamanhoDasCelulasADireita,
 					align: 'right'
@@ -1026,7 +1026,7 @@ var GeradorDeBoleto = (function () {
 					align: 'left'
 				});
 
-			pagador=boleto.pagador.nome +" - "+ boleto.pagador.registroNacional;
+			pagador = boleto.pagador.nome + " - " + boleto.pagador.registroNacional;
 			pdf.font('normal')
 				.fontSize(args.tamanhoDaFonte)
 				.text(pagador, args.ajusteX + 30, args.ajusteY + tituloDaSetimaLinha + 115 + 10, {
@@ -1170,8 +1170,10 @@ var GeradorDeBoleto = (function () {
 		});
 
 
-		pdf.end();
-		// resolve(pdf);
+		return new Promise(function (resolve, reject) {
+			pdf.end();
+			resolve(pdf);
+		})
 	};
 
 	return GeradorDeBoleto;
@@ -1179,13 +1181,17 @@ var GeradorDeBoleto = (function () {
 
 
 module.exports = class BoletosGerador {
-	pdfFile(boletos = null, dir = './tmp/boletos', filename = "/boleto.pdf") {
-		if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-		const stream = fs.createWriteStream(`${dir}${filename}`);
-		new GeradorDeBoleto().gerarPDF({
-			creditos: '',
-			stream,
-		}, boletos);
-		console.log(`Sucess: Generate file to: ${dir}${filename}`);
+	async pdfFile(boletos = null, dir = './tmp/boletos/', filename = "boleto.pdf") {
+		return new Promise(function (resolve, reject) {
+			if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+			const stream = fs.createWriteStream(`${dir}${filename}`);
+			let gr = new GeradorDeBoleto();
+			let pdf = gr.gerarPDF({
+				creditos: '',
+				stream,
+			}, boletos);
+			console.log(`Sucess: Generate file to: ${dir}${filename}`);
+			resolve(pdf);
+		})
 	}
 };
