@@ -1172,26 +1172,26 @@ var GeradorDeBoleto = (function () {
 
 		return new Promise(function (resolve, reject) {
 			pdf.end();
-			resolve(pdf);
+			pdf.on("end", () => {
+				resolve(pdf);
+			})
 		})
 	};
-
 	return GeradorDeBoleto;
 })();
 
 
 module.exports = class BoletosGerador {
 	async pdfFile(boletos = null, dir = './tmp/boletos/', filename = "boleto.pdf") {
-		return new Promise(function (resolve, reject) {
-			if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-			const stream = fs.createWriteStream(`${dir}${filename}`);
-			let gr = new GeradorDeBoleto();
-			let pdf = gr.gerarPDF({
-				creditos: '',
-				stream,
-			}, boletos);
-			// console.log(`Sucess: Generate file to: ${dir}${filename}`);
-			resolve(pdf);
-		})
+		if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+		const stream = fs.createWriteStream(`${dir}${filename}`);
+		let gr = new GeradorDeBoleto();
+		let pdf = await gr.gerarPDF({
+			creditos: '',
+			stream,
+		}, boletos);
+		// console.log(`Sucess: Generate file to: ${dir}${filename}`);
+		return pdf;
+
 	}
 };
