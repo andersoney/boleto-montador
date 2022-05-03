@@ -9,9 +9,9 @@ Outro detalhe é que alguns leitores de PDF não reconheceram a 'fonte' do codig
 Um detalhe importante é que todas as formatações devem ser realizadas antes de passar para a geração do boleto. A biblioteca só faz converter os dados para o formato PDF. 
 
 # Parametros para geração do boleto
-```json
+```js
 {
-  "numeroDocumento": String(required),
+  numeroDocumento: String(required),
   especieDocumento: String(required),
   valor: Float(required),
   desconto: Float(required),
