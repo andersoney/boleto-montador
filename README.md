@@ -11,7 +11,7 @@ Um detalhe importante é que todas as formatações devem ser realizadas antes d
 # Parametros para geração do boleto
 ```json
 {
-  numeroDocumento: String(required),
+  "numeroDocumento": String(required),
   especieDocumento: String(required),
   valor: Float(required),
   desconto: Float(required),
